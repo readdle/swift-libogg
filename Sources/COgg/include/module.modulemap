@@ -1,0 +1,4 @@
+module COgg [system] {
+umbrella header "ogg/ogg.h"
+export *
+}

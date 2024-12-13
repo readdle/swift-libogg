@@ -1,0 +1,29 @@
+name: Test package
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+  
+jobs:
+  test:
+
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: true
+    - name: Build
+      run: swift build
+    - name: Run tests
+      run: |
+        set -e
+        echo "::group::Run BitwiseTests"
+        .build/debug/BitwiseTests
+        echo "::endgroup::"
+        echo "::group::Run FramingTests"
+        .build/debug/FramingTests
+        echo "::endgroup::"
